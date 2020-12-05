@@ -24,7 +24,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR - in case I ever get bored and try to use an API
   String valueToConvert;
   String showValue = '';
   String error;
@@ -49,7 +48,6 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Column(
-              // Tried to play with the layout
               children: <Widget>[
                 const Text(
                   'Convert to:',
@@ -108,11 +106,8 @@ class _HomePageState extends State<HomePage> {
                     convertedValue = double.tryParse(valueToConvert);
                     if (convertedValue != null && convertedValue >= 0) {
                       convertedValue *= conversionRate;
-                      showValue =
-                          convertedValue.toStringAsFixed(2) + currencyToConvert;
-                      currentFontSize = max(
-                          52.0 - convertedValue.toStringAsFixed(0).length * 2.7,
-                          18); // Applied a custom size to make it more beautiful
+                      showValue = convertedValue.toStringAsFixed(2) + currencyToConvert;
+                      currentFontSize = max(52.0 - convertedValue.toStringAsFixed(0).length * 2.7, 18);
                       error = null;
                     } else {
                       showValue = '';

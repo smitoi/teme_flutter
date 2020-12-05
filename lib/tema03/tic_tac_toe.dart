@@ -65,16 +65,14 @@ class _HomePageState extends State<HomePage> {
     List<int> winPos;
 
     for (int i = 0; i < 9; i += 3) {
-      if (board[i] != 0 &&
-          (board[i] == board[i + 1] && board[i + 1] == board[i + 2])) {
+      if (board[i] != 0 && (board[i] == board[i + 1] && board[i + 1] == board[i + 2])) {
         winPos = <int>[i, i + 1, i + 2];
         break;
       }
     }
 
     for (int i = 0; i < 3; i++) {
-      if (board[i] != 0 &&
-          (board[i] == board[i + 3] && board[i + 3] == board[i + 6])) {
+      if (board[i] != 0 && (board[i] == board[i + 3] && board[i + 3] == board[i + 6])) {
         winPos = <int>[i, i + 3, i + 6];
         break;
       }

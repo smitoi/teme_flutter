@@ -94,14 +94,12 @@ class _HomePageState extends State<HomePage> {
         if (guessValue > numberToGuess) {
           tries++;
           print(tries);
-          guessMessage =
-              'You tried $guessValue. Try lower!\nHint: The number is $numberToGuess.';
+          guessMessage = 'You tried $guessValue. Try lower!\nHint: The number is $numberToGuess.';
           color = Colors.red;
         } else if (guessValue < numberToGuess) {
           tries++;
           print(tries);
-          guessMessage =
-              'You tried $guessValue. Try higher!\nHint: The number is $numberToGuess.';
+          guessMessage = 'You tried $guessValue. Try higher!\nHint: The number is $numberToGuess.';
           color = Colors.green;
         } else {
           _showDialog();

@@ -89,10 +89,7 @@ class _HomePageState extends State<HomePage> {
                 gradient: const LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
-                    colors: <Color>[
-                      Color.fromARGB(255, 183, 148, 146),
-                      Color.fromARGB(255, 145, 124, 120)
-                    ]),
+                    colors: <Color>[Color.fromARGB(255, 183, 148, 146), Color.fromARGB(255, 145, 124, 120)]),
               ),
             ),
             onTap: () {
