@@ -16,6 +16,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  audioplayer: 0.8.1
 
 flutter:
   uses-material-design: true
