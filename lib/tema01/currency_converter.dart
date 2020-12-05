@@ -25,40 +25,41 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR - in case I ever get bored and try to use an API
-  String  valueToConvert;
-  String  showValue = '';
-  String  error;
-  String  currencyToConvert = ' RON';
-  double  conversionRate = 4.8732;
-  double  currentFontSize = 40;
-  double  convertedValue;
+  String valueToConvert;
+  String showValue = '';
+  String error;
+  String currencyToConvert = ' RON';
+  double conversionRate = 4.8732;
+  double currentFontSize = 40;
+  double convertedValue;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
+    return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text (
+          title: const Text(
             'Currency Converter',
           ),
         ),
-        body: Padding (
+        body: Padding(
             padding: const EdgeInsets.fromLTRB(64, 32, 64, 32),
-            child: Column (
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget> [
-                Column ( // Tried to play with the layout
-                  children: <Widget> [
-                    const Text (
+              children: <Widget>[
+                Column(
+                  // Tried to play with the layout
+                  children: <Widget>[
+                    const Text(
                       'Convert to:',
-                      style: TextStyle (
+                      style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 48.0,
                       ),
                     ),
-                    ListTile (
+                    ListTile(
                       title: const Text('RON'),
                       leading: Radio<double>(
                         groupValue: conversionRate,
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                         },
                       ),
                     ),
-                    ListTile (
+                    ListTile(
                       title: const Text('USD'),
                       leading: Radio<double>(
                         groupValue: conversionRate,
@@ -86,20 +87,20 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                TextField (
-                  decoration: InputDecoration (
+                TextField(
+                  decoration: InputDecoration(
                     hintText: 'Enter the value in EUR',
                     suffixText: 'EUR',
                     errorText: error,
                   ),
                   keyboardType: TextInputType.number,
                   onChanged: (String inputValue) {
-                    setState (() {
+                    setState(() {
                       valueToConvert = inputValue;
                     });
                   },
                 ),
-                RaisedButton (
+                RaisedButton(
                   child: const Text('Convert'),
                   onPressed: () {
                     setState(() {
@@ -107,38 +108,39 @@ class _HomePageState extends State<HomePage> {
                         convertedValue = double.tryParse(valueToConvert);
                         if (convertedValue != null && convertedValue >= 0) {
                           convertedValue *= conversionRate;
-                          showValue = convertedValue.toStringAsFixed(2) + currencyToConvert;
-                          currentFontSize = max(52.0 - convertedValue.toStringAsFixed(0).length * 2.7, 18); // Applied a custom size to make it more beautiful
+                          showValue = convertedValue.toStringAsFixed(2) +
+                              currencyToConvert;
+                          currentFontSize = max(
+                              52.0 -
+                                  convertedValue.toStringAsFixed(0).length *
+                                      2.7,
+                              18); // Applied a custom size to make it more beautiful
                           error = null;
-                        }
-                        else {
+                        } else {
                           showValue = '';
                           error = 'Please enter a VALID number';
                         }
-                      }
-                      else {
+                      } else {
                         showValue = '';
                         error = 'Please enter a number';
                       }
                     });
                   },
                 ),
-                Text (
+                Text(
                   showValue,
-                  style: TextStyle (
+                  style: TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.bold,
                     fontSize: currentFontSize,
                   ),
                 ),
-                Image.network (
+                Image.network(
                   'https://i.pinimg.com/originals/fb/76/27/fb76278415ce6724ddab2e373e8b3f2d.png',
                   height: 250,
                   width: 250,
                 ),
               ],
-            )
-        )
-    );
+            )));
   }
 }
