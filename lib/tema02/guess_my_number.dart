@@ -113,97 +113,99 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text(
-            'Guess My Number',
-          ),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Guess My Number',
         ),
-        body: Padding(
-            padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    "I'm thinking of a number between 1 and 100",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                "I'm thinking of a number between 1 and 100",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    "It's your turn to guess my number!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                "It's your turn to guess my number!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(guessMessage,
-                      textAlign: TextAlign.center,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(guessMessage,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: color,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  )),
+            ),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'Try a number!',
                       style: TextStyle(
-                        color: color,
+                        color: Colors.grey,
                         fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      )),
-                ),
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'Try a number!',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: TextField(
-                            controller: _controller,
-                            keyboardType: TextInputType.number,
-                            readOnly: !isGameStarted,
-                            onChanged: (String inputValue) {
-                              setState(() {
-                                _inputValue = inputValue;
-                                print(_inputValue);
-                              });
-                            },
-                          ),
-                        ),
-                        RaisedButton(
-                          child: Text(buttonMessage),
-                          onPressed: () {
-                            setState(() {
-                              if (!isGameStarted)
-                                _reset();
-                              else
-                                _playerGuess();
-                            });
-                          },
-                        ),
-                      ],
+                        fontSize: 28,
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: TextField(
+                        controller: _controller,
+                        keyboardType: TextInputType.number,
+                        readOnly: !isGameStarted,
+                        onChanged: (String inputValue) {
+                          setState(() {
+                            _inputValue = inputValue;
+                            print(_inputValue);
+                          });
+                        },
+                      ),
+                    ),
+                    RaisedButton(
+                      child: Text(buttonMessage),
+                      onPressed: () {
+                        setState(() {
+                          if (!isGameStarted)
+                            _reset();
+                          else
+                            _playerGuess();
+                        });
+                      },
+                    ),
+                  ],
                 ),
-              ],
-            )));
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
