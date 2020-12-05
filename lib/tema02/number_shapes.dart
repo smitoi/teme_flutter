@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   final double epsilon = 0.00000001;
   int _numberToCheck;
   String _inputValue;
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   void _showDialog() {
     showDialog<void>(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (BuildContext context) => AlertDialog(
         title: Text(_numberToCheck.toString()),
         content: Text(_message),
       ),
@@ -41,17 +41,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   bool isSquare(int n) {
-    double p = pow(n, 1 / 2);
+    final double p = pow(n, 1 / 2);
     print(p);
     print(p.toInt());
     return p == p.toInt();
   }
 
   bool isCube(int n) {
-    double p = pow(n, 1 / 3) + epsilon;
+    final double p = pow(n, 1 / 3) + epsilon;
     print(p);
     print(p.toInt());
-    return double.parse((p).toStringAsFixed(2)) == p.toInt();
+    return double.parse(p.toStringAsFixed(2)) == p.toInt();
   }
 
   void verifyNumber() {
@@ -59,8 +59,8 @@ class _HomePageState extends State<HomePage> {
     if (_inputValue.isNotEmpty) {
       _numberToCheck = int.tryParse(_inputValue);
 
-      bool square = isSquare(_numberToCheck);
-      bool cube = isCube(_numberToCheck);
+      final bool square = isSquare(_numberToCheck);
+      final bool cube = isCube(_numberToCheck);
 
       if (square && cube) {
         _message = 'The number is square and cube.';
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             verifyNumber();
           },
-          child: Icon(Icons.calculate)),
+          child: const Icon(Icons.calculate)),
     );
   }
 }

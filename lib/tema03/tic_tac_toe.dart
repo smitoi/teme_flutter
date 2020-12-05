@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   void _reset() {
     setState(() {
-      boardColors = [
+      boardColors = <Color>[
         Colors.white,
         Colors.white,
         Colors.white,
@@ -47,13 +47,14 @@ class _HomePageState extends State<HomePage> {
         Colors.white,
         Colors.white
       ];
-      board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      board = <int>[0, 0, 0, 0, 0, 0, 0, 0, 0];
       gamePlaying = true;
       _winner = '';
       _winnerText = '';
     });
   }
 
+  @override
   void initState() {
     super.initState();
     _reset();
@@ -61,14 +62,12 @@ class _HomePageState extends State<HomePage> {
 
   int _whoWins() {
     bool draw = true;
-    String winType = null;
     List<int> winPos;
 
     for (int i = 0; i < 9; i += 3) {
       if (board[i] != 0 &&
           (board[i] == board[i + 1] && board[i + 1] == board[i + 2])) {
-        winType = 'row';
-        winPos = [i, i + 1, i + 2];
+        winPos = <int>[i, i + 1, i + 2];
         break;
       }
     }
@@ -76,20 +75,17 @@ class _HomePageState extends State<HomePage> {
     for (int i = 0; i < 3; i++) {
       if (board[i] != 0 &&
           (board[i] == board[i + 3] && board[i + 3] == board[i + 6])) {
-        winType = 'column';
-        winPos = [i, i + 3, i + 6];
+        winPos = <int>[i, i + 3, i + 6];
         break;
       }
     }
 
     if (board[0] != 0 && (board[0] == board[4] && board[4] == board[8])) {
-      winType = 'diag1';
-      winPos = [0, 4, 8];
+      winPos = <int>[0, 4, 8];
     }
 
     if (board[2] != 0 && (board[2] == board[4] && board[4] == board[6])) {
-      winType = 'diag2';
-      winPos = [2, 4, 6];
+      winPos = <int>[2, 4, 6];
     }
 
     for (int i = 0; i < 9; i++)
@@ -107,7 +103,7 @@ class _HomePageState extends State<HomePage> {
       }
       return board[winPos[0]];
     } else {
-      return (-1);
+      return -1;
     }
   }
 
@@ -127,7 +123,7 @@ class _HomePageState extends State<HomePage> {
       firstPlayerTurn = !firstPlayerTurn;
     }
 
-    int winner = _whoWins();
+    final int winner = _whoWins();
     if (winner != -1 && winner != 0) {
       if (winner == 1)
         _winner = 'Player 1';
@@ -159,16 +155,16 @@ class _HomePageState extends State<HomePage> {
         children: <Widget>[
           Text(
             _winnerText,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
             ),
           ),
           GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.all(16.0),
             itemCount: board.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
@@ -181,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                     color: boardColors[index],
                     borderRadius: BorderRadius.circular(20.0),
                   ),
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                 ),
                 onTap: () {
                   _playerAction(index);

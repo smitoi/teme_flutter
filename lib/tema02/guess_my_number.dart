@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   Random random = Random();
   int numberToGuess;
   int tries = 0;
@@ -35,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   bool isGameStarted = false;
   Color color;
 
+  @override
   void initState() {
     super.initState();
     _stopGame();
@@ -57,12 +59,12 @@ class _HomePageState extends State<HomePage> {
   void _showDialog() {
     showDialog<void>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text("You have guessed the number!"),
-        content: Text("And it only took you $tries tries!"),
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('You have guessed the number!'),
+        content: Text('And it only took you $tries tries!'),
         actions: <Widget>[
           FlatButton(
-            child: Text("Try again!"),
+            child: const Text('Try again!'),
             onPressed: () {
               Navigator.of(context).pop();
               setState(() {
@@ -71,7 +73,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           FlatButton(
-            child: Text("Stop the game."),
+            child: const Text('Stop the game.'),
             onPressed: () {
               Navigator.of(context).pop();
               setState(() {
@@ -123,8 +125,8 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     "I'm thinking of a number between 1 and 100",
                     textAlign: TextAlign.center,
@@ -135,8 +137,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     "It's your turn to guess my number!",
                     textAlign: TextAlign.center,
@@ -164,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Text(
+                        const Text(
                           'Try a number!',
                           style: TextStyle(
                             color: Colors.grey,

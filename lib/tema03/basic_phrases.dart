@@ -32,7 +32,7 @@ class Phrase {
 
 class _HomePageState extends State<HomePage> {
   final AudioPlayer audioPlugin = AudioPlayer();
-  final List<Phrase> phrases = [
+  final List<Phrase> phrases = <Phrase>[
     Phrase('Hello.',
         'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=Hello&tl=en&total=1&idx=0&textlen=5'),
     Phrase('Hallo.',
@@ -59,14 +59,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Basic phrases"),
+        title: const Text('Basic phrases'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(255, 30, 16, 20),
+        backgroundColor: const Color.fromARGB(255, 30, 16, 20),
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: phrases.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
@@ -80,16 +80,16 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     Text(phrases[index].phrase,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                         )),
                   ]),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0),
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
-                    colors: [
+                    colors: <Color>[
                       Color.fromARGB(255, 183, 148, 146),
                       Color.fromARGB(255, 145, 124, 120)
                     ]),
