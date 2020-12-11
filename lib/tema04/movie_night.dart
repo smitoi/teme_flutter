@@ -25,11 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class Movie {
-  Movie(
-      {@required this.title,
-      @required this.imageUrl,
-      @required this.year,
-      @required this.genres});
+  Movie({@required this.title, @required this.imageUrl, @required this.year, @required this.genres});
 
   Movie.fromJson(dynamic item)
       : title = item['title'],
@@ -51,8 +47,11 @@ class Movie {
 class _HomePageState extends State<HomePage> {
   List<Movie> _movieList = <Movie>[];
   int _page = 0;
+  int _minimumRating = 0;
   bool _disabledButtons = true;
+  bool _noMoreMovies = false;
   String _quality;
+  String _sortBy = 'date_added';
 
   @override
   void initState() {
@@ -147,6 +146,121 @@ class _HomePageState extends State<HomePage> {
                         : (String value) {
                             setState(() {
                               _quality = value;
+                              _loadMovies(-_page + 1);
+                            });
+                          },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'Minimum rating: $_minimumRating',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Slider(
+                  value: _minimumRating.toDouble(),
+                  min: 0.0,
+                  max: 10.0,
+                  onChanged: _disabledButtons
+                      ? null
+                      : (double value) {
+                          setState(() {
+                            _minimumRating = value.toInt();
+                          });
+                        },
+                  onChangeEnd: _disabledButtons
+                      ? null
+                      : (double value) {
+                          setState(() {
+                            _minimumRating = value.toInt();
+                            _loadMovies(-_page + 1);
+                          });
+                        },
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                const Text(
+                  'The movies will be sorted by:',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                ListTile(
+                  title: const Text('Added date'),
+                  leading: Radio<String>(
+                    groupValue: _sortBy,
+                    value: 'date_added',
+                    onChanged: _disabledButtons
+                        ? null
+                        : (String value) {
+                            setState(() {
+                              _sortBy = value;
+                              _loadMovies(-_page + 1);
+                            });
+                          },
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Title'),
+                  leading: Radio<String>(
+                    groupValue: _sortBy,
+                    value: 'title',
+                    onChanged: _disabledButtons
+                        ? null
+                        : (String value) {
+                            setState(() {
+                              _sortBy = value;
+                              _loadMovies(-_page + 1);
+                            });
+                          },
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Year'),
+                  leading: Radio<String>(
+                    groupValue: _sortBy,
+                    value: 'year',
+                    onChanged: _disabledButtons
+                        ? null
+                        : (String value) {
+                            setState(() {
+                              _sortBy = value;
+                              _loadMovies(-_page + 1);
+                            });
+                          },
+                  ),
+                ),
+                ListTile(
+                  title: const Text('Rating'),
+                  leading: Radio<String>(
+                    groupValue: _sortBy,
+                    value: 'rating',
+                    onChanged: _disabledButtons
+                        ? null
+                        : (String value) {
+                            setState(() {
+                              _sortBy = value;
+                              _loadMovies(-_page + 1);
                             });
                           },
                   ),
@@ -178,6 +292,10 @@ class _HomePageState extends State<HomePage> {
       requestUrl += '&quality=$_quality';
     }
 
+    requestUrl += '&minimum_rating=$_minimumRating';
+    requestUrl += '&sort_by=$_sortBy';
+
+    print('Request at: $requestUrl');
     final Response response = await get(requestUrl);
     final Map<String, dynamic> map = jsonDecode(response.body);
     final List<dynamic> movieData = map['data']['movies'];
@@ -185,11 +303,18 @@ class _HomePageState extends State<HomePage> {
     _movieList = movieData.map((dynamic item) => Movie.fromJson(item)).toList();
     print(_movieList);
 
+    if (_movieList.length < 20) {
+      _noMoreMovies = true;
+    } else {
+      _noMoreMovies = false;
+    }
+
     setState(() {
-      print('Begin loading...');
+      print('End loading...');
       print('Index: $index');
       print('Page: $_page');
       print('Buttons not disabled: $_disabledButtons');
+      print('No. of movies: ' + _movieList.length.toString());
       _disabledButtons = false;
     });
   }
@@ -217,10 +342,8 @@ class _HomePageState extends State<HomePage> {
                     child: Ink(
                       child: ListTile(
                         leading: Image.network(_movieList[index].imageUrl),
-                        title: Text(_movieList[index].title,
-                            style: const TextStyle(fontSize: 16.0)),
-                        subtitle: Text(_movieList[index].genres.join(', '),
-                            style: const TextStyle(fontSize: 8.0)),
+                        title: Text(_movieList[index].title, style: const TextStyle(fontSize: 16.0)),
+                        subtitle: Text(_movieList[index].genres.join(', '), style: const TextStyle(fontSize: 8.0)),
                       ),
                     ),
                   );
@@ -235,13 +358,11 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   RaisedButton(
                     child: const Text('Prev. page'),
-                    onPressed: _disabledButtons || _page == 1
-                        ? null
-                        : () => _loadMovies(-1),
+                    onPressed: _disabledButtons || _page == 1 ? null : () => _loadMovies(-1),
                   ),
                   RaisedButton(
                     child: const Text('Next page'),
-                    onPressed: _disabledButtons ? null : () => _loadMovies(1),
+                    onPressed: _disabledButtons || _noMoreMovies ? null : () => _loadMovies(1),
                   ),
                 ],
               ),
