@@ -25,19 +25,13 @@ class HomePage extends StatefulWidget {
 }
 
 class Movie {
-  Movie(
-      {@required this.title,
-      @required this.imageUrl,
-      @required this.year,
-      @required this.genres});
+  Movie({@required this.title, @required this.imageUrl, @required this.year, @required this.genres});
 
   Movie.fromJson(dynamic item)
       : title = item['title'],
         year = item['year'],
         imageUrl = item['medium_cover_image'],
-        genres = item['genres'] == null
-            ? <String>[]
-            : List<String>.from(item['genres']);
+        genres = item['genres'] == null ? <String>[] : List<String>.from(item['genres']);
 
   final String title;
   final String imageUrl;
@@ -348,10 +342,8 @@ class _HomePageState extends State<HomePage> {
                     child: Ink(
                       child: ListTile(
                         leading: Image.network(_movieList[index].imageUrl),
-                        title: Text(_movieList[index].title,
-                            style: const TextStyle(fontSize: 16.0)),
-                        subtitle: Text(_movieList[index].genres.join(', '),
-                            style: const TextStyle(fontSize: 8.0)),
+                        title: Text(_movieList[index].title, style: const TextStyle(fontSize: 16.0)),
+                        subtitle: Text(_movieList[index].genres.join(', '), style: const TextStyle(fontSize: 8.0)),
                       ),
                     ),
                   );
@@ -366,15 +358,11 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   RaisedButton(
                     child: const Text('Prev. page'),
-                    onPressed: _disabledButtons || _page == 1
-                        ? null
-                        : () => _loadMovies(-1),
+                    onPressed: _disabledButtons || _page == 1 ? null : () => _loadMovies(-1),
                   ),
                   RaisedButton(
                     child: const Text('Next page'),
-                    onPressed: _disabledButtons || _noMoreMovies
-                        ? null
-                        : () => _loadMovies(1),
+                    onPressed: _disabledButtons || _noMoreMovies ? null : () => _loadMovies(1),
                   ),
                 ],
               ),
