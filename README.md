@@ -4,3 +4,5 @@
 * [x] Tema 1 - Currency Converter
 * [x] Tema 2 - Guess My Number și Number Shapes
 * [x] Tema 3 - Basic Phrases și Tic Tac Toe
+* [x] Tema 4 - Movie App
+* [x] Tema 5 - Movie App with Redux
