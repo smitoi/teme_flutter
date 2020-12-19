@@ -61,17 +61,14 @@ class HomePage extends StatelessWidget {
                             ? null
                             : (double value) {
                                 _ratingValue = value;
-                                StoreProvider.of<AppState>(context)
-                                    .dispatch(SetRating(value.toInt()));
+                                StoreProvider.of<AppState>(context).dispatch(SetRating(value.toInt()));
                               },
                         onChangeEnd: _isLoading(context)
                             ? null
                             : (double value) {
                                 _ratingValue = value;
-                                StoreProvider.of<AppState>(context)
-                                    .dispatch(SetRating(value.toInt()));
-                                StoreProvider.of<AppState>(context)
-                                    .dispatch(const GetMovies());
+                                StoreProvider.of<AppState>(context).dispatch(SetRating(value.toInt()));
+                                StoreProvider.of<AppState>(context).dispatch(const GetMovies());
                               },
                       ),
                     ],
@@ -89,9 +86,7 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        quality == null
-                            ? 'No quality was selected'
-                            : 'Selected quality: $quality',
+                        quality == null ? 'No quality was selected' : 'Selected quality: $quality',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -108,10 +103,8 @@ class HomePage extends StatelessWidget {
                               ? null
                               : (String value) {
                                   _quality = value;
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(SetQuality(value));
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(const GetMovies());
+                                  StoreProvider.of<AppState>(context).dispatch(SetQuality(value));
+                                  StoreProvider.of<AppState>(context).dispatch(const GetMovies());
                                 },
                         ),
                       ),
@@ -125,10 +118,8 @@ class HomePage extends StatelessWidget {
                               ? null
                               : (String value) {
                                   _quality = value;
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(SetQuality(value));
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(const GetMovies());
+                                  StoreProvider.of<AppState>(context).dispatch(SetQuality(value));
+                                  StoreProvider.of<AppState>(context).dispatch(const GetMovies());
                                 },
                         ),
                       ),
@@ -142,10 +133,8 @@ class HomePage extends StatelessWidget {
                               ? null
                               : (String value) {
                                   _quality = value;
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(SetQuality(value));
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(const GetMovies());
+                                  StoreProvider.of<AppState>(context).dispatch(SetQuality(value));
+                                  StoreProvider.of<AppState>(context).dispatch(const GetMovies());
                                 },
                         ),
                       ),
@@ -159,10 +148,8 @@ class HomePage extends StatelessWidget {
                               ? null
                               : (String value) {
                                   _quality = value;
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(SetQuality(value));
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(const GetMovies());
+                                  StoreProvider.of<AppState>(context).dispatch(SetQuality(value));
+                                  StoreProvider.of<AppState>(context).dispatch(const GetMovies());
                                 },
                         ),
                       ),
@@ -186,8 +173,7 @@ class HomePage extends StatelessWidget {
   }
 
   bool _previousPageExists(BuildContext context) {
-    return StoreProvider.of<AppState>(context).state.isLoading ||
-        StoreProvider.of<AppState>(context).state.page == 1;
+    return StoreProvider.of<AppState>(context).state.isLoading || StoreProvider.of<AppState>(context).state.page == 1;
   }
 
   @override
@@ -212,34 +198,27 @@ class HomePage extends StatelessWidget {
                       return InkWell(
                         child: Ink(
                           child: ListTile(
-                            leading:
-                                Image.network(movies[index].mediumCoverImage),
-                            title: Text(movies[index].title,
-                                style: const TextStyle(fontSize: 16.0)),
+                            leading: Image.network(movies[index].mediumCoverImage),
+                            title: Text(movies[index].title, style: const TextStyle(fontSize: 16.0)),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(movies[index].genres.join(', '),
-                                    style: const TextStyle(fontSize: 8.0)),
+                                Text(movies[index].genres.join(', '), style: const TextStyle(fontSize: 8.0)),
                                 Text(
                                     'Rating: ' +
                                         (movies[index].rating == 0
                                             ? 'not specified'
-                                            : movies[index].rating.toString() +
-                                                ' out of 10'),
+                                            : movies[index].rating.toString() + ' out of 10'),
                                     style: const TextStyle(fontSize: 8.0)),
                                 Text(
                                     'Runtime: ' +
                                         (movies[index].runtime == 0
                                             ? 'not specified'
-                                            : movies[index].runtime.toString() +
-                                                ' minutes'),
+                                            : movies[index].runtime.toString() + ' minutes'),
                                     style: const TextStyle(fontSize: 8.0)),
                                 Text(
                                     'Year: ' +
-                                        (movies[index].year == 0
-                                            ? 'not specified'
-                                            : movies[index].year.toString()),
+                                        (movies[index].year == 0 ? 'not specified' : movies[index].year.toString()),
                                     style: const TextStyle(fontSize: 8.0)),
                               ],
                             ),
@@ -260,16 +239,14 @@ class HomePage extends StatelessWidget {
                           onPressed: _previousPageExists(context)
                               ? null
                               : () {
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(const GetPreviousPage());
+                                  StoreProvider.of<AppState>(context).dispatch(const GetPreviousPage());
                                 }),
                       RaisedButton(
                           child: const Text('Next page'),
                           onPressed: _nextPageExists(context)
                               ? null
                               : () {
-                                  StoreProvider.of<AppState>(context)
-                                      .dispatch(const GetNextPage());
+                                  StoreProvider.of<AppState>(context).dispatch(const GetNextPage());
                                 }),
                     ],
                   ),

@@ -21,13 +21,12 @@ class AppMiddleware {
     ];
   }
 
-  Future<void> _getMovies(
-      Store<AppState> store, dynamic action, NextDispatcher next) async {
+  Future<void> _getMovies(Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
     if (action is GetNextPage) {
       try {
-        final List<Movie> movies = await _ytsApi.getMovies(
-            store.state.page + 1, store.state.rating, store.state.quality);
+        final List<Movie> movies =
+            await _ytsApi.getMovies(store.state.page + 1, store.state.rating, store.state.quality);
 
         final GetNextPageSuccessful successful = GetNextPageSuccessful(movies);
         store.dispatch(successful);
@@ -37,11 +36,10 @@ class AppMiddleware {
       }
     } else if (action is GetPreviousPage) {
       try {
-        final List<Movie> movies = await _ytsApi.getMovies(
-            store.state.page - 1, store.state.rating, store.state.quality);
+        final List<Movie> movies =
+            await _ytsApi.getMovies(store.state.page - 1, store.state.rating, store.state.quality);
 
-        final GetPreviousPageSuccessful successful =
-            GetPreviousPageSuccessful(movies);
+        final GetPreviousPageSuccessful successful = GetPreviousPageSuccessful(movies);
         store.dispatch(successful);
       } catch (e) {
         final GetPreviousPageError error = GetPreviousPageError(e);
@@ -49,8 +47,7 @@ class AppMiddleware {
       }
     } else if (action is GetMovies) {
       try {
-        final List<Movie> movies =
-            await _ytsApi.getMovies(1, store.state.rating, store.state.quality);
+        final List<Movie> movies = await _ytsApi.getMovies(1, store.state.rating, store.state.quality);
 
         final GetMoviesSuccessful successful = GetMoviesSuccessful(movies);
         store.dispatch(successful);
