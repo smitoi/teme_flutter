@@ -9,6 +9,7 @@ import '../actions/get_next_page.dart';
 import '../actions/get_previous_page.dart';
 import '../actions/set_actions.dart';
 import '../containers/movies_container.dart';
+import '../containers/set_rating_container.dart';
 import '../models/app_state.dart';
 import '../models/movie.dart';
 
@@ -33,48 +34,46 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          StoreConnector<AppState, int>(
-              converter: (Store<AppState> store) => store.state.rating,
-              builder: (BuildContext context, int rating) {
-                double _ratingValue = rating.toDouble();
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Minimum rating: $rating',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Slider(
-                        value: _ratingValue,
-                        min: 0.0,
-                        max: 10.0,
-                        activeColor: const Color(0xff8b0000),
-                        inactiveColor: const Color(0xffe8b3b3),
-                        onChanged: _isLoading(context)
-                            ? null
-                            : (double value) {
-                                _ratingValue = value;
-                                StoreProvider.of<AppState>(context).dispatch(SetRating(value.toInt()));
-                              },
-                        onChangeEnd: _isLoading(context)
-                            ? null
-                            : (double value) {
-                                _ratingValue = value;
-                                StoreProvider.of<AppState>(context).dispatch(SetRating(value.toInt()));
-                                StoreProvider.of<AppState>(context).dispatch(const GetMovies());
-                              },
-                      ),
-                    ],
+          SetRatingContainer(builder: (BuildContext context, int rating) {
+            double _ratingValue = rating.toDouble();
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Minimum rating: $rating',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                );
-              }),
+                  Slider(
+                    value: _ratingValue,
+                    min: 0.0,
+                    max: 10.0,
+                    activeColor: const Color(0xff8b0000),
+                    inactiveColor: const Color(0xffe8b3b3),
+                    onChanged: _isLoading(context)
+                        ? null
+                        : (double value) {
+                            _ratingValue = value;
+                            StoreProvider.of<AppState>(context).dispatch(SetRating(value.toInt()));
+                          },
+                    onChangeEnd: _isLoading(context)
+                        ? null
+                        : (double value) {
+                            _ratingValue = value;
+                            StoreProvider.of<AppState>(context).dispatch(SetRating(value.toInt()));
+                            StoreProvider.of<AppState>(context).dispatch(const GetMovies());
+                          },
+                  ),
+                ],
+              ),
+            );
+          }),
           StoreConnector<AppState, String>(
               converter: (Store<AppState> store) => store.state.quality,
               builder: (BuildContext context, String quality) {
