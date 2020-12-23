@@ -12,33 +12,22 @@ class _$AppState extends AppState {
   @override
   final int page;
   @override
-  final bool moreMovies;
-  @override
   final bool isLoading;
   @override
   final int rating;
   @override
   final String quality;
+  @override
+  final int selected;
 
-  factory _$AppState([void Function(AppStateBuilder) updates]) =>
-      (new AppStateBuilder()..update(updates)).build();
+  factory _$AppState([void Function(AppStateBuilder) updates]) => (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._(
-      {this.movies,
-      this.page,
-      this.moreMovies,
-      this.isLoading,
-      this.rating,
-      this.quality})
-      : super._() {
+  _$AppState._({this.movies, this.page, this.isLoading, this.rating, this.quality, this.selected}) : super._() {
     if (movies == null) {
       throw new BuiltValueNullFieldError('AppState', 'movies');
     }
     if (page == null) {
       throw new BuiltValueNullFieldError('AppState', 'page');
-    }
-    if (moreMovies == null) {
-      throw new BuiltValueNullFieldError('AppState', 'moreMovies');
     }
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('AppState', 'isLoading');
@@ -49,8 +38,7 @@ class _$AppState extends AppState {
   }
 
   @override
-  AppState rebuild(void Function(AppStateBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+  AppState rebuild(void Function(AppStateBuilder) updates) => (toBuilder()..update(updates)).build();
 
   @override
   AppStateBuilder toBuilder() => new AppStateBuilder()..replace(this);
@@ -61,22 +49,18 @@ class _$AppState extends AppState {
     return other is AppState &&
         movies == other.movies &&
         page == other.page &&
-        moreMovies == other.moreMovies &&
         isLoading == other.isLoading &&
         rating == other.rating &&
-        quality == other.quality;
+        quality == other.quality &&
+        selected == other.selected;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc(
-            $jc(
-                $jc($jc($jc(0, movies.hashCode), page.hashCode),
-                    moreMovies.hashCode),
-                isLoading.hashCode),
-            rating.hashCode),
-        quality.hashCode));
+        $jc($jc($jc($jc($jc(0, movies.hashCode), page.hashCode), isLoading.hashCode), rating.hashCode),
+            quality.hashCode),
+        selected.hashCode));
   }
 
   @override
@@ -84,10 +68,10 @@ class _$AppState extends AppState {
     return (newBuiltValueToStringHelper('AppState')
           ..add('movies', movies)
           ..add('page', page)
-          ..add('moreMovies', moreMovies)
           ..add('isLoading', isLoading)
           ..add('rating', rating)
-          ..add('quality', quality))
+          ..add('quality', quality)
+          ..add('selected', selected))
         .toString();
   }
 }
@@ -107,12 +91,6 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
 
   set page(int page) => _$this._page = page;
 
-  bool _moreMovies;
-
-  bool get moreMovies => _$this._moreMovies;
-
-  set moreMovies(bool moreMovies) => _$this._moreMovies = moreMovies;
-
   bool _isLoading;
 
   bool get isLoading => _$this._isLoading;
@@ -131,16 +109,22 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
 
   set quality(String quality) => _$this._quality = quality;
 
+  int _selected;
+
+  int get selected => _$this._selected;
+
+  set selected(int selected) => _$this._selected = selected;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
     if (_$v != null) {
       _movies = _$v.movies?.toBuilder();
       _page = _$v.page;
-      _moreMovies = _$v.moreMovies;
       _isLoading = _$v.isLoading;
       _rating = _$v.rating;
       _quality = _$v.quality;
+      _selected = _$v.selected;
       _$v = null;
     }
     return this;
@@ -167,18 +151,17 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
           new _$AppState._(
               movies: movies.build(),
               page: page,
-              moreMovies: moreMovies,
               isLoading: isLoading,
               rating: rating,
-              quality: quality);
+              quality: quality,
+              selected: selected);
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'movies';
         movies.build();
       } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            'AppState', _$failedField, e.toString());
+        throw new BuiltValueNestedFieldError('AppState', _$failedField, e.toString());
       }
       rethrow;
     }

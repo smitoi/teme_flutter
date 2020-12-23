@@ -1,17 +1,16 @@
+library get_previous_page;
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../models/movie.dart';
 
-class GetPreviousPage {
-  const GetPreviousPage();
-}
+part 'get_previous_page.freezed.dart';
 
-class GetPreviousPageSuccessful {
-  const GetPreviousPageSuccessful(this.movies);
+@freezed
+abstract class GetPreviousPage with _$GetPreviousPage {
+  const factory GetPreviousPage() = GetPreviousPageStart;
 
-  final List<Movie> movies;
-}
+  const factory GetPreviousPage.successful(List<Movie> movies) = GetPreviousPageSuccessful;
 
-class GetPreviousPageError {
-  const GetPreviousPageError(this.error);
-
-  final dynamic error;
+  const factory GetPreviousPage.error(dynamic error) = GetPreviousPageError;
 }

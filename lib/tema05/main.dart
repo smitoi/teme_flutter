@@ -22,7 +22,7 @@ void main() {
     middleware: middleware.middleware,
   );
 
-  store.dispatch(const GetNextPage());
+  store.dispatch(const GetNextPageStart());
 
   runApp(MyApp(store: store));
 }

@@ -16,6 +16,7 @@ dependencies:
   http: ^0.12.2
   built_value: ^7.1.0
   built_collection: ^4.3.2
+  freezed_annotation: ^0.12.0
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +26,8 @@ dev_dependencies:
   built_value_generator: ^7.1.0
   redux: ^4.0.0
   flutter_redux: ^0.7.0
+  freezed: any
+  analyzer: any
 
 
 flutter:

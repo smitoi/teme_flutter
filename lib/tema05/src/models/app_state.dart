@@ -11,11 +11,12 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   factory AppState.initialState() {
     final AppStateBuilder builder = AppStateBuilder();
-    builder.isLoading = true;
-    builder.page = 0;
-    builder.moreMovies = true;
-    builder.rating = 0;
-    builder.quality = null;
+    builder
+      ..isLoading = true
+      ..page = 0
+      ..rating = 0
+      ..quality = null
+      ..selected = null;
     return builder.build();
   }
 
@@ -25,12 +26,13 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   int get page;
 
-  bool get moreMovies;
-
   bool get isLoading;
 
   int get rating;
 
   @nullable
   String get quality;
+
+  @nullable
+  int get selected;
 }

@@ -1,17 +1,16 @@
+library get_next_page;
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../models/movie.dart';
 
-class GetNextPage {
-  const GetNextPage();
-}
+part 'get_next_page.freezed.dart';
 
-class GetNextPageSuccessful {
-  const GetNextPageSuccessful(this.movies);
+@freezed
+abstract class GetNextPage with _$GetNextPage {
+  const factory GetNextPage() = GetNextPageStart;
 
-  final List<Movie> movies;
-}
+  const factory GetNextPage.successful(List<Movie> movies) = GetNextPageSuccessful;
 
-class GetNextPageError {
-  const GetNextPageError(this.error);
-
-  final dynamic error;
+  const factory GetNextPage.error(dynamic error) = GetNextPageError;
 }
