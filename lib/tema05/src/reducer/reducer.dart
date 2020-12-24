@@ -2,6 +2,7 @@ import '../actions/get_next_page.dart';
 import '../actions/get_previous_page.dart';
 import '../actions/set_page.dart';
 import '../actions/set_quality.dart';
+import '../actions/set_query.dart';
 import '../actions/set_rating.dart';
 import '../actions/set_selected.dart';
 import '../models/app_state.dart';
@@ -17,10 +18,9 @@ AppState reducer(AppState state, dynamic action) {
     builder.page = action.page;
   } else if (action is SetSelected) {
     builder.selected = action.selected;
-    print(builder.selected);
-  }
-
-  if (action is GetNextPageStart) {
+  } else if (action is SetQuery) {
+    builder.query = action.query;
+  } else if (action is GetNextPageStart) {
     builder.isLoading = true;
   } else if (action is GetNextPageSuccessful) {
     builder.movies.clear();

@@ -10,13 +10,18 @@ class YtsApi {
 
   final Client _client;
 
-  Future<List<Movie>> getMovies(int page, int rating, String quality) async {
+  Future<List<Movie>> getMovies(int page, int rating, String quality, String query) async {
     String url = 'https://yts.mx/api/v2/list_movies.json?page=$page&minimum_rating=$rating';
 
     if (quality != null) {
       url += '&quality=$quality';
     }
 
+    if (query != null) {
+      url += '&query_term="$query"';
+    }
+
+    print('URL = $url');
     final Response response = await _client.get(url);
     final String body = response.body;
     final List<dynamic> list = jsonDecode(body)['data']['movies'];

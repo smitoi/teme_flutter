@@ -37,6 +37,8 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
       serializers.serialize(object.mediumCoverImage, specifiedType: const FullType(String)),
       'large_cover_image',
       serializers.serialize(object.largeCoverImage, specifiedType: const FullType(String)),
+      'url',
+      serializers.serialize(object.url, specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -84,6 +86,9 @@ class _$MovieSerializer implements StructuredSerializer<Movie> {
         case 'large_cover_image':
           result.largeCoverImage = serializers.deserialize(value, specifiedType: const FullType(String)) as String;
           break;
+        case 'url':
+          result.url = serializers.deserialize(value, specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -112,6 +117,8 @@ class _$Movie extends Movie {
   final String mediumCoverImage;
   @override
   final String largeCoverImage;
+  @override
+  final String url;
 
   factory _$Movie([void Function(MovieBuilder) updates]) => (new MovieBuilder()..update(updates)).build();
 
@@ -125,7 +132,8 @@ class _$Movie extends Movie {
       this.summary,
       this.backgroundImage,
       this.mediumCoverImage,
-      this.largeCoverImage})
+      this.largeCoverImage,
+      this.url})
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('Movie', 'id');
@@ -157,6 +165,9 @@ class _$Movie extends Movie {
     if (largeCoverImage == null) {
       throw new BuiltValueNullFieldError('Movie', 'largeCoverImage');
     }
+    if (url == null) {
+      throw new BuiltValueNullFieldError('Movie', 'url');
+    }
   }
 
   @override
@@ -178,7 +189,8 @@ class _$Movie extends Movie {
         summary == other.summary &&
         backgroundImage == other.backgroundImage &&
         mediumCoverImage == other.mediumCoverImage &&
-        largeCoverImage == other.largeCoverImage;
+        largeCoverImage == other.largeCoverImage &&
+        url == other.url;
   }
 
   @override
@@ -188,13 +200,15 @@ class _$Movie extends Movie {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc($jc($jc(0, id.hashCode), title.hashCode), year.hashCode), rating.hashCode),
-                            runtime.hashCode),
-                        genres.hashCode),
-                    summary.hashCode),
-                backgroundImage.hashCode),
-            mediumCoverImage.hashCode),
-        largeCoverImage.hashCode));
+                        $jc(
+                            $jc($jc($jc($jc($jc(0, id.hashCode), title.hashCode), year.hashCode), rating.hashCode),
+                                runtime.hashCode),
+                            genres.hashCode),
+                        summary.hashCode),
+                    backgroundImage.hashCode),
+                mediumCoverImage.hashCode),
+            largeCoverImage.hashCode),
+        url.hashCode));
   }
 
   @override
@@ -209,7 +223,8 @@ class _$Movie extends Movie {
           ..add('summary', summary)
           ..add('backgroundImage', backgroundImage)
           ..add('mediumCoverImage', mediumCoverImage)
-          ..add('largeCoverImage', largeCoverImage))
+          ..add('largeCoverImage', largeCoverImage)
+          ..add('url', url))
         .toString();
   }
 }
@@ -277,6 +292,12 @@ class MovieBuilder implements Builder<Movie, MovieBuilder> {
 
   set largeCoverImage(String largeCoverImage) => _$this._largeCoverImage = largeCoverImage;
 
+  String _url;
+
+  String get url => _$this._url;
+
+  set url(String url) => _$this._url = url;
+
   MovieBuilder();
 
   MovieBuilder get _$this {
@@ -291,6 +312,7 @@ class MovieBuilder implements Builder<Movie, MovieBuilder> {
       _backgroundImage = _$v.backgroundImage;
       _mediumCoverImage = _$v.mediumCoverImage;
       _largeCoverImage = _$v.largeCoverImage;
+      _url = _$v.url;
       _$v = null;
     }
     return this;
@@ -324,7 +346,8 @@ class MovieBuilder implements Builder<Movie, MovieBuilder> {
               summary: summary,
               backgroundImage: backgroundImage,
               mediumCoverImage: mediumCoverImage,
-              largeCoverImage: largeCoverImage);
+              largeCoverImage: largeCoverImage,
+              url: url);
     } catch (_) {
       String _$failedField;
       try {

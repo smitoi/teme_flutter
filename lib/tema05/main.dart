@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:http/http.dart';
 import 'package:redux/redux.dart';
-import 'src/actions/get_next_page.dart';
 
+import 'src/actions/get_next_page.dart';
 import 'src/data/yts_api.dart';
 import 'src/middleware/app_middleware.dart';
 import 'src/models/app_state.dart';
 import 'src/presentation/home_page.dart';
+import 'src/presentation/movie_details.dart';
 import 'src/reducer/reducer.dart';
 
 void main() {
@@ -36,9 +37,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreProvider<AppState>(
       store: store,
-      child: const MaterialApp(
-        home: HomePage(),
-      ),
+      child: MaterialApp(title: 'Movie Night', initialRoute: '/', routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) {
+          return const HomePage();
+        },
+        '/movieDetails': (BuildContext context) {
+          return const MovieDetails();
+        },
+      }),
     );
   }
 }

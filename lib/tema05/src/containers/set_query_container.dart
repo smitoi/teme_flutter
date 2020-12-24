@@ -4,18 +4,17 @@ import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 
 import '../models/app_state.dart';
-import '../models/movie.dart';
 
-class MovieContainer extends StatelessWidget {
-  const MovieContainer({Key key, @required this.builder}) : super(key: key);
+class SetQueryContainer extends StatelessWidget {
+  const SetQueryContainer({Key key, @required this.builder}) : super(key: key);
 
-  final ViewModelBuilder<Movie> builder;
+  final ViewModelBuilder<String> builder;
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, Movie>(
+    return StoreConnector<AppState, String>(
       converter: (Store<AppState> store) {
-        return store.state.movies[store.state.selected];
+        return store.state.query;
       },
       builder: builder,
     );

@@ -26,7 +26,7 @@ class AppMiddleware {
     if (action is GetNextPageStart) {
       try {
         final List<Movie> movies =
-            await _ytsApi.getMovies(store.state.page + 1, store.state.rating, store.state.quality);
+            await _ytsApi.getMovies(store.state.page + 1, store.state.rating, store.state.quality, store.state.query);
 
         final GetNextPageSuccessful successful = GetNextPage.successful(movies);
         store.dispatch(successful);
@@ -37,7 +37,7 @@ class AppMiddleware {
     } else if (action is GetPreviousPageStart) {
       try {
         final List<Movie> movies =
-            await _ytsApi.getMovies(store.state.page - 1, store.state.rating, store.state.quality);
+            await _ytsApi.getMovies(store.state.page - 1, store.state.rating, store.state.quality, store.state.query);
 
         final GetPreviousPageSuccessful successful = GetPreviousPage.successful(movies);
         store.dispatch(successful);

@@ -19,10 +19,13 @@ class _$AppState extends AppState {
   final String quality;
   @override
   final int selected;
+  @override
+  final String query;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) => (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.movies, this.page, this.isLoading, this.rating, this.quality, this.selected}) : super._() {
+  _$AppState._({this.movies, this.page, this.isLoading, this.rating, this.quality, this.selected, this.query})
+      : super._() {
     if (movies == null) {
       throw new BuiltValueNullFieldError('AppState', 'movies');
     }
@@ -52,15 +55,18 @@ class _$AppState extends AppState {
         isLoading == other.isLoading &&
         rating == other.rating &&
         quality == other.quality &&
-        selected == other.selected;
+        selected == other.selected &&
+        query == other.query;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc($jc(0, movies.hashCode), page.hashCode), isLoading.hashCode), rating.hashCode),
-            quality.hashCode),
-        selected.hashCode));
+        $jc(
+            $jc($jc($jc($jc($jc(0, movies.hashCode), page.hashCode), isLoading.hashCode), rating.hashCode),
+                quality.hashCode),
+            selected.hashCode),
+        query.hashCode));
   }
 
   @override
@@ -71,7 +77,8 @@ class _$AppState extends AppState {
           ..add('isLoading', isLoading)
           ..add('rating', rating)
           ..add('quality', quality)
-          ..add('selected', selected))
+          ..add('selected', selected)
+          ..add('query', query))
         .toString();
   }
 }
@@ -115,6 +122,12 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
 
   set selected(int selected) => _$this._selected = selected;
 
+  String _query;
+
+  String get query => _$this._query;
+
+  set query(String query) => _$this._query = query;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -125,6 +138,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _rating = _$v.rating;
       _quality = _$v.quality;
       _selected = _$v.selected;
+      _query = _$v.query;
       _$v = null;
     }
     return this;
@@ -154,7 +168,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               isLoading: isLoading,
               rating: rating,
               quality: quality,
-              selected: selected);
+              selected: selected,
+              query: query);
     } catch (_) {
       String _$failedField;
       try {

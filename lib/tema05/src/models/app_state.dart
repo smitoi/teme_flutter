@@ -16,7 +16,8 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
       ..page = 0
       ..rating = 0
       ..quality = null
-      ..selected = null;
+      ..selected = null
+      ..query = null;
     return builder.build();
   }
 
@@ -35,4 +36,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   @nullable
   int get selected;
+
+  @nullable
+  String get query;
 }

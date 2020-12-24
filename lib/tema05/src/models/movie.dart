@@ -39,5 +39,7 @@ abstract class Movie implements Built<Movie, MovieBuilder> {
   @BuiltValueField(wireName: 'large_cover_image')
   String get largeCoverImage;
 
+  String get url;
+
   static Serializer<Movie> get serializer => _$movieSerializer;
 }

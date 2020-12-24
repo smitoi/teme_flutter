@@ -7,10 +7,12 @@ import '../actions/get_next_page.dart';
 import '../actions/get_previous_page.dart';
 import '../actions/set_page.dart';
 import '../actions/set_quality.dart';
+import '../actions/set_query.dart';
 import '../actions/set_rating.dart';
 import '../actions/set_selected.dart';
 import '../containers/movies_container.dart';
 import '../containers/set_quality_container.dart';
+import '../containers/set_query_container.dart';
 import '../containers/set_rating_container.dart';
 import '../models/app_state.dart';
 import '../models/movie.dart';
@@ -36,6 +38,34 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+          SetQueryContainer(builder: (BuildContext context, String query) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  const Text(
+                    'Enter search term: ',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextField(
+                    autocorrect: false,
+                    cursorColor: const Color(0xff8b0000),
+                    enabled: !_isLoading(context),
+                    onChanged: (String value) {
+                      if (value.isNotEmpty) {
+                        StoreProvider.of<AppState>(context).dispatch(SetQuery(query: value));
+                      }
+                    },
+                  ),
+                ],
+              ),
+            );
+          }),
           SetRatingContainer(builder: (BuildContext context, int rating) {
             return Padding(
               padding: const EdgeInsets.all(16.0),
@@ -66,26 +96,12 @@ class HomePage extends StatelessWidget {
                         ? null
                         : (double value) {
                             StoreProvider.of<AppState>(context).dispatch(SetRating(value.toInt()));
-                            StoreProvider.of<AppState>(context).dispatch(const SetPage(0));
-                            StoreProvider.of<AppState>(context).dispatch(const GetNextPage());
                           },
                   ),
                 ],
               ),
             );
           }),
-
-          /*
-          Text(
-                        quality == null ? 'No quality was selected' : 'Selected quality: $quality',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-           */
-
           SetQualityContainer(builder: (BuildContext context, String quality) {
             return Padding(
               padding: const EdgeInsets.all(16.0),
@@ -108,14 +124,26 @@ class HomePage extends StatelessWidget {
                             ? null
                             : (String value) {
                                 StoreProvider.of<AppState>(context).dispatch(SetQuality(quality: value));
-                                StoreProvider.of<AppState>(context).dispatch(const SetPage(0));
-                                StoreProvider.of<AppState>(context).dispatch(const GetNextPage());
                               }),
                   );
                 }).toList(),
               ),
             );
           }),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: IconButton(
+                icon: const Icon(Icons.search),
+                iconSize: 48.0,
+                onPressed: _isLoading(context)
+                    ? null
+                    : () {
+                        StoreProvider.of<AppState>(context).dispatch(const SetPage(0));
+                        StoreProvider.of<AppState>(context).dispatch(const GetNextPage());
+                        StoreProvider.of<AppState>(context).dispatch(const SetQuery(query: null));
+                        Navigator.pop(context);
+                      }),
+          ),
         ],
       ),
     );
@@ -156,32 +184,21 @@ class HomePage extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () {
-                          StoreProvider.of<AppState>(context).dispatch(SetSelected(movies[index].id));
+                          StoreProvider.of<AppState>(context).dispatch(SetSelected(index));
+                          Navigator.pushNamed(context, '/movieDetails');
                         },
                         child: Ink(
                           child: ListTile(
                             leading: Image.network(movies[index].mediumCoverImage),
-                            title: Text(movies[index].title, style: const TextStyle(fontSize: 16.0)),
+                            title: Text(
+                                movies[index].year == null
+                                    ? movies[index].title
+                                    : '${movies[index].title} (${movies[index].year})',
+                                style: const TextStyle(fontSize: 16.0)),
                             subtitle: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(movies[index].genres.join(', '), style: const TextStyle(fontSize: 8.0)),
-                                Text(
-                                    'Rating: ' +
-                                        (movies[index].rating == 0
-                                            ? 'not specified'
-                                            : movies[index].rating.toString() + ' out of 10'),
-                                    style: const TextStyle(fontSize: 8.0)),
-                                Text(
-                                    'Runtime: ' +
-                                        (movies[index].runtime == 0
-                                            ? 'not specified'
-                                            : movies[index].runtime.toString() + ' minutes'),
-                                    style: const TextStyle(fontSize: 8.0)),
-                                Text(
-                                    'Year: ' +
-                                        (movies[index].year == 0 ? 'not specified' : movies[index].year.toString()),
-                                    style: const TextStyle(fontSize: 8.0)),
+                                Text(movies[index].genres.join(', '), style: const TextStyle(fontSize: 12.0)),
                               ],
                             ),
                           ),

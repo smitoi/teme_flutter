@@ -1,7 +1,6 @@
 library set_selected;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../models/movie.dart';
 
 part 'set_selected.freezed.dart';
 
