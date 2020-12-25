@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
+                        children: <Widget>[
                           IconButton(
                               iconSize: 36.0,
                               icon: const Icon(Icons.flip_camera_android),
