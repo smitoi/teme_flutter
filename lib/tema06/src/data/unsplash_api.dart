@@ -12,7 +12,8 @@ class UnsplashApi {
   final Client _client;
 
   Future<PhotoBuilder> getPhoto(String username) async {
-    String url = 'https://api.unsplash.com/photos/random/?orientation=portrait&client_id=$_clientId';
+    String url =
+        'https://api.unsplash.com/photos/random/?orientation=portrait&client_id=$_clientId';
 
     if (username != null) {
       url += '&username=$username';

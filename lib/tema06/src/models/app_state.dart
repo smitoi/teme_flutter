@@ -10,7 +10,9 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   factory AppState.initialState() {
     final AppStateBuilder builder = AppStateBuilder();
-    builder.isLoading = true;
+    builder
+      ..isLoading = true
+      ..likedPhotos = <Photo>[];
     return builder.build();
   }
 
@@ -29,4 +31,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   @nullable
   String get username;
+
+  @nullable
+  List<Photo> get likedPhotos;
 }

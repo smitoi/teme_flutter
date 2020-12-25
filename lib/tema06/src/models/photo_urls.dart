@@ -21,5 +21,8 @@ abstract class PhotoUrls implements Built<PhotoUrls, PhotoUrlsBuilder> {
   @BuiltValueField(wireName: 'small')
   String get smallSizeUrl;
 
+  @BuiltValueField(wireName: 'thumb')
+  String get thumbSizeUrl;
+
   static Serializer<PhotoUrls> get serializer => _$photoUrlsSerializer;
 }

@@ -17,12 +17,19 @@ class _$AppState extends AppState {
   final String query;
   @override
   final String username;
+  @override
+  final List<Photo> likedPhotos;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
   _$AppState._(
-      {this.isLoading, this.photo, this.orientation, this.query, this.username})
+      {this.isLoading,
+      this.photo,
+      this.orientation,
+      this.query,
+      this.username,
+      this.likedPhotos})
       : super._() {
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('AppState', 'isLoading');
@@ -44,17 +51,20 @@ class _$AppState extends AppState {
         photo == other.photo &&
         orientation == other.orientation &&
         query == other.query &&
-        username == other.username;
+        username == other.username &&
+        likedPhotos == other.likedPhotos;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
         $jc(
-            $jc($jc($jc(0, isLoading.hashCode), photo.hashCode),
-                orientation.hashCode),
-            query.hashCode),
-        username.hashCode));
+            $jc(
+                $jc($jc($jc(0, isLoading.hashCode), photo.hashCode),
+                    orientation.hashCode),
+                query.hashCode),
+            username.hashCode),
+        likedPhotos.hashCode));
   }
 
   @override
@@ -64,7 +74,8 @@ class _$AppState extends AppState {
           ..add('photo', photo)
           ..add('orientation', orientation)
           ..add('query', query)
-          ..add('username', username))
+          ..add('username', username)
+          ..add('likedPhotos', likedPhotos))
         .toString();
   }
 }
@@ -92,6 +103,10 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   String get username => _$this._username;
   set username(String username) => _$this._username = username;
 
+  List<Photo> _likedPhotos;
+  List<Photo> get likedPhotos => _$this._likedPhotos;
+  set likedPhotos(List<Photo> likedPhotos) => _$this._likedPhotos = likedPhotos;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -101,6 +116,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _orientation = _$v.orientation;
       _query = _$v.query;
       _username = _$v.username;
+      _likedPhotos = _$v.likedPhotos;
       _$v = null;
     }
     return this;
@@ -129,7 +145,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               photo: _photo?.build(),
               orientation: orientation,
               query: query,
-              username: username);
+              username: username,
+              likedPhotos: likedPhotos);
     } catch (_) {
       String _$failedField;
       try {

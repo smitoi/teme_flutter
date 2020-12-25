@@ -24,6 +24,9 @@ class _$PhotoUrlsSerializer implements StructuredSerializer<PhotoUrls> {
       'small',
       serializers.serialize(object.smallSizeUrl,
           specifiedType: const FullType(String)),
+      'thumb',
+      serializers.serialize(object.thumbSizeUrl,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -48,6 +51,10 @@ class _$PhotoUrlsSerializer implements StructuredSerializer<PhotoUrls> {
           result.smallSizeUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'thumb':
+          result.thumbSizeUrl = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
       }
     }
 
@@ -60,16 +67,22 @@ class _$PhotoUrls extends PhotoUrls {
   final String fullSizeUrl;
   @override
   final String smallSizeUrl;
+  @override
+  final String thumbSizeUrl;
 
   factory _$PhotoUrls([void Function(PhotoUrlsBuilder) updates]) =>
       (new PhotoUrlsBuilder()..update(updates)).build();
 
-  _$PhotoUrls._({this.fullSizeUrl, this.smallSizeUrl}) : super._() {
+  _$PhotoUrls._({this.fullSizeUrl, this.smallSizeUrl, this.thumbSizeUrl})
+      : super._() {
     if (fullSizeUrl == null) {
       throw new BuiltValueNullFieldError('PhotoUrls', 'fullSizeUrl');
     }
     if (smallSizeUrl == null) {
       throw new BuiltValueNullFieldError('PhotoUrls', 'smallSizeUrl');
+    }
+    if (thumbSizeUrl == null) {
+      throw new BuiltValueNullFieldError('PhotoUrls', 'thumbSizeUrl');
     }
   }
 
@@ -85,19 +98,22 @@ class _$PhotoUrls extends PhotoUrls {
     if (identical(other, this)) return true;
     return other is PhotoUrls &&
         fullSizeUrl == other.fullSizeUrl &&
-        smallSizeUrl == other.smallSizeUrl;
+        smallSizeUrl == other.smallSizeUrl &&
+        thumbSizeUrl == other.thumbSizeUrl;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, fullSizeUrl.hashCode), smallSizeUrl.hashCode));
+    return $jf($jc($jc($jc(0, fullSizeUrl.hashCode), smallSizeUrl.hashCode),
+        thumbSizeUrl.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('PhotoUrls')
           ..add('fullSizeUrl', fullSizeUrl)
-          ..add('smallSizeUrl', smallSizeUrl))
+          ..add('smallSizeUrl', smallSizeUrl)
+          ..add('thumbSizeUrl', thumbSizeUrl))
         .toString();
   }
 }
@@ -113,12 +129,17 @@ class PhotoUrlsBuilder implements Builder<PhotoUrls, PhotoUrlsBuilder> {
   String get smallSizeUrl => _$this._smallSizeUrl;
   set smallSizeUrl(String smallSizeUrl) => _$this._smallSizeUrl = smallSizeUrl;
 
+  String _thumbSizeUrl;
+  String get thumbSizeUrl => _$this._thumbSizeUrl;
+  set thumbSizeUrl(String thumbSizeUrl) => _$this._thumbSizeUrl = thumbSizeUrl;
+
   PhotoUrlsBuilder();
 
   PhotoUrlsBuilder get _$this {
     if (_$v != null) {
       _fullSizeUrl = _$v.fullSizeUrl;
       _smallSizeUrl = _$v.smallSizeUrl;
+      _thumbSizeUrl = _$v.thumbSizeUrl;
       _$v = null;
     }
     return this;
@@ -140,7 +161,10 @@ class PhotoUrlsBuilder implements Builder<PhotoUrls, PhotoUrlsBuilder> {
   @override
   _$PhotoUrls build() {
     final _$result = _$v ??
-        new _$PhotoUrls._(fullSizeUrl: fullSizeUrl, smallSizeUrl: smallSizeUrl);
+        new _$PhotoUrls._(
+            fullSizeUrl: fullSizeUrl,
+            smallSizeUrl: smallSizeUrl,
+            thumbSizeUrl: thumbSizeUrl);
     replace(_$result);
     return _$result;
   }

@@ -10,6 +10,6 @@
 | 3.1 | Basic Phrases | <img src="./img/basic_phrases.jpg" width = 150px height = 300px> |
 | 3.2 | Tic Tac Toe | <img src="./img/tic_tac_toe.jpg" width = 150px height = 300px> |
 | 4 | Movie App | Vezi mai jos |
-| 5 | Movie App + Redux | <img src="./img/movie_night_main.jpg" width = 150px height = 300px> <img src="./img/movie_night_slider.jpg" width = 150px height = 300px> |
-| 6 | Photo App | <img src="./img/photo_app.jpg" width = 150px height = 300px> |
+| 5 | Movie App + Redux | <img src="./img/movie_night_main.jpg" width = 150px height = 300px> <img src="./img/movie_night_slider.jpg" width = 150px height = 300px>  <img src="./img/movie_night_details.jpg" width = 150px height = 300px> |
+| 6 | Photo App | <img src="./img/photo_app.jpg" width = 150px height = 300px> <img src="./img/photo_app_liked.jpg" width = 150px height = 300px> |
 

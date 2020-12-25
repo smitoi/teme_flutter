@@ -15,12 +15,14 @@ class _$UserSerializer implements StructuredSerializer<User> {
   final String wireName = 'User';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, User object, {FullType specifiedType = FullType.unspecified}) {
+  Iterable<Object> serialize(Serializers serializers, User object,
+      {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
       serializers.serialize(object.id, specifiedType: const FullType(String)),
       'username',
-      serializers.serialize(object.username, specifiedType: const FullType(String)),
+      serializers.serialize(object.username,
+          specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -38,10 +40,12 @@ class _$UserSerializer implements StructuredSerializer<User> {
       final dynamic value = iterator.current;
       switch (key) {
         case 'id':
-          result.id = serializers.deserialize(value, specifiedType: const FullType(String)) as String;
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'username':
-          result.username = serializers.deserialize(value, specifiedType: const FullType(String)) as String;
+          result.username = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
       }
     }
@@ -56,7 +60,8 @@ class _$User extends User {
   @override
   final String username;
 
-  factory _$User([void Function(UserBuilder) updates]) => (new UserBuilder()..update(updates)).build();
+  factory _$User([void Function(UserBuilder) updates]) =>
+      (new UserBuilder()..update(updates)).build();
 
   _$User._({this.id, this.username}) : super._() {
     if (id == null) {
@@ -68,7 +73,8 @@ class _$User extends User {
   }
 
   @override
-  User rebuild(void Function(UserBuilder) updates) => (toBuilder()..update(updates)).build();
+  User rebuild(void Function(UserBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
 
   @override
   UserBuilder toBuilder() => new UserBuilder()..replace(this);
@@ -86,7 +92,10 @@ class _$User extends User {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('User')..add('id', id)..add('username', username)).toString();
+    return (newBuiltValueToStringHelper('User')
+          ..add('id', id)
+          ..add('username', username))
+        .toString();
   }
 }
 
@@ -94,15 +103,11 @@ class UserBuilder implements Builder<User, UserBuilder> {
   _$User _$v;
 
   String _id;
-
   String get id => _$this._id;
-
   set id(String id) => _$this._id = id;
 
   String _username;
-
   String get username => _$this._username;
-
   set username(String username) => _$this._username = username;
 
   UserBuilder();
