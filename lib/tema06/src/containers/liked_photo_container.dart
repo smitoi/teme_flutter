@@ -7,8 +7,7 @@ import '../models/app_state.dart';
 import '../models/photo.dart';
 
 class LikedPhotoContainer extends StatelessWidget {
-  const LikedPhotoContainer({Key key, @required this.builder})
-      : super(key: key);
+  const LikedPhotoContainer({Key key, @required this.builder}) : super(key: key);
 
   final ViewModelBuilder<List<Photo>> builder;
 

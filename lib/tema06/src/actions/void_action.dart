@@ -1,7 +1,6 @@
 library void_action;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../models/photo.dart';
 
 part 'void_action.freezed.dart';
 

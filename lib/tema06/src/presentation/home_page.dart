@@ -18,8 +18,7 @@ class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
 
   Widget _drawer() {
-    return LikedPhotoContainer(
-        builder: (BuildContext context, List<Photo> likedPhotos) {
+    return LikedPhotoContainer(builder: (BuildContext context, List<Photo> likedPhotos) {
       return Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -42,8 +41,7 @@ class HomePage extends StatelessWidget {
               children: likedPhotos.map((Photo photo) {
                 return GestureDetector(
                   onDoubleTap: () {
-                    StoreProvider.of<AppState>(context)
-                        .dispatch(AddLikedPhoto(photo));
+                    StoreProvider.of<AppState>(context).dispatch(AddLikedPhoto(photo));
                   },
                   onLongPress: () async {
                     final String url = Uri.encodeFull(photo.urls.fullSizeUrl);
@@ -79,26 +77,20 @@ class HomePage extends StatelessWidget {
             style: TextStyle(
               color: photo == null
                   ? Colors.white
-                  : Color(0xFFFFFFFF -
-                      int.parse(photo.color.substring(1, 7), radix: 16) +
-                      0xFF000000),
+                  : Color(0xFFFFFFFF - int.parse(photo.color.substring(1, 7), radix: 16) + 0xFF000000),
             ),
           ),
           centerTitle: true,
-          backgroundColor: photo == null
-              ? Colors.black
-              : Color(int.parse(photo.color.substring(1, 7), radix: 16) +
-                  0xFF000000),
+          backgroundColor:
+              photo == null ? Colors.black : Color(int.parse(photo.color.substring(1, 7), radix: 16) + 0xFF000000),
         ),
         drawer: _drawer(),
         body: StoreProvider.of<AppState>(context).state.isLoading
-            ? const Center(
-                child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.black)))
+            ? const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.black)))
             : Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Stack(
-                  children: [
+                  children: <Widget>[
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -107,14 +99,12 @@ class HomePage extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                             onDoubleTap: () {
-                              StoreProvider.of<AppState>(context)
-                                  .dispatch(AddLikedPhoto(photo));
+                              StoreProvider.of<AppState>(context).dispatch(AddLikedPhoto(photo));
                               _opacity = 1.0;
                               print('Nu s-a rulat timer-ul');
                               Timer(const Duration(milliseconds: 500), () {
                                 _opacity = 0;
-                                StoreProvider.of<AppState>(context)
-                                    .dispatch(const VoidAction());
+                                StoreProvider.of<AppState>(context).dispatch(const VoidAction());
                               });
                             },
                             child: Container(
@@ -124,8 +114,7 @@ class HomePage extends StatelessWidget {
                                   color: Colors.black,
                                 ),
                               ),
-                              child: Image.network(photo.urls.smallSizeUrl,
-                                  fit: BoxFit.fill),
+                              child: Image.network(photo.urls.smallSizeUrl, fit: BoxFit.fill),
                             ),
                           ),
                         ),
@@ -138,39 +127,27 @@ class HomePage extends StatelessWidget {
                               IconButton(
                                   iconSize: 36.0,
                                   icon: const Icon(Icons.flip_camera_android),
-                                  onPressed: StoreProvider.of<AppState>(context)
-                                          .state
-                                          .isLoading
+                                  onPressed: StoreProvider.of<AppState>(context).state.isLoading
                                       ? null
                                       : () {
-                                          StoreProvider.of<AppState>(context)
-                                              .dispatch(const GetPhotoStart());
+                                          StoreProvider.of<AppState>(context).dispatch(const GetPhotoStart());
                                         }),
                               IconButton(
                                   iconSize: 36.0,
-                                  icon: StoreProvider.of<AppState>(context)
-                                              .state
-                                              .username ==
-                                          null
+                                  icon: StoreProvider.of<AppState>(context).state.username == null
                                       ? const Icon(Icons.person_add)
                                       : const Icon(Icons.person_remove),
                                   onPressed: () {
-                                    StoreProvider.of<AppState>(context)
-                                        .dispatch(SetUser(
-                                            user: StoreProvider.of<AppState>(
-                                                            context)
-                                                        .state
-                                                        .username ==
-                                                    null
-                                                ? photo.user.username
-                                                : null));
+                                    StoreProvider.of<AppState>(context).dispatch(SetUser(
+                                        user: StoreProvider.of<AppState>(context).state.username == null
+                                            ? photo.user.username
+                                            : null));
                                   }),
                               IconButton(
                                   iconSize: 36.0,
                                   icon: const Icon(Icons.open_in_new),
                                   onPressed: () async {
-                                    final String url =
-                                        Uri.encodeFull(photo.urls.fullSizeUrl);
+                                    final String url = Uri.encodeFull(photo.urls.fullSizeUrl);
                                     if (await canLaunch(url)) {
                                       await launch(url);
                                     } else {
@@ -185,17 +162,11 @@ class HomePage extends StatelessWidget {
                     AnimatedOpacity(
                         child: Align(
                           child: Icon(
-                            StoreProvider.of<AppState>(context)
-                                    .state
-                                    .likedPhotos
-                                    .contains(photo)
+                            StoreProvider.of<AppState>(context).state.likedPhotos.contains(photo)
                                 ? Icons.add_circle
                                 : Icons.remove_circle,
                             size: 128.0,
-                            color: Color(0xFFFFFFFF -
-                                int.parse(photo.color.substring(1, 7),
-                                    radix: 16) +
-                                0xFF000000),
+                            color: Color(0xFFFFFFFF - int.parse(photo.color.substring(1, 7), radix: 16) + 0xFF000000),
                           ),
                         ),
                         opacity: _opacity,

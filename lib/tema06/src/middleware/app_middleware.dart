@@ -19,14 +19,12 @@ class AppMiddleware {
     ];
   }
 
-  Future<void> _getPhoto(
-      Store<AppState> store, dynamic action, NextDispatcher next) async {
+  Future<void> _getPhoto(Store<AppState> store, dynamic action, NextDispatcher next) async {
     next(action);
 
     if (action is GetPhotoStart) {
       try {
-        final PhotoBuilder photo =
-            await _unsplashApi.getPhoto(store.state.username);
+        final PhotoBuilder photo = await _unsplashApi.getPhoto(store.state.username);
         final GetPhotoSuccessful successful = GetPhoto.successful(photo);
         store.dispatch(successful);
       } catch (e) {
