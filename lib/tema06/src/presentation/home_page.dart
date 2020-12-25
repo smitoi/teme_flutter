@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../actions/get_photo.dart';
+import '../actions/set_user.dart';
 import '../containers/photo_container.dart';
 import '../models/app_state.dart';
 import '../models/photo.dart';
@@ -16,7 +18,7 @@ class HomePage extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            photo == null ? 'Photo Picker' : '${photo.color}',
+            photo == null ? 'Photo Picker' : 'By ${photo.user.username}',
             style: TextStyle(
               color: photo == null
                   ? Colors.white
@@ -41,6 +43,9 @@ class HomePage extends StatelessWidget {
                         onDoubleTap: () {
                           print('DOUBLE TAP');
                         },
+                        onTap: () {
+                          print('tap');
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -54,14 +59,42 @@ class HomePage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: IconButton(
-                          iconSize: 36.0,
-                          icon: const Icon(Icons.flip_camera_android),
-                          onPressed: StoreProvider.of<AppState>(context).state.isLoading
-                              ? null
-                              : () {
-                                  StoreProvider.of<AppState>(context).dispatch(const GetPhotoStart());
-                                }),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              iconSize: 36.0,
+                              icon: const Icon(Icons.flip_camera_android),
+                              onPressed: StoreProvider.of<AppState>(context).state.isLoading
+                                  ? null
+                                  : () {
+                                      StoreProvider.of<AppState>(context).dispatch(const GetPhotoStart());
+                                    }),
+                          IconButton(
+                              iconSize: 36.0,
+                              icon: StoreProvider.of<AppState>(context).state.username == null
+                                  ? const Icon(Icons.person_add)
+                                  : const Icon(Icons.person_remove),
+                              onPressed: () {
+                                StoreProvider.of<AppState>(context).dispatch(SetUser(
+                                    user: StoreProvider.of<AppState>(context).state.username == null
+                                        ? photo.user.username
+                                        : null));
+                              }),
+                          IconButton(
+                              iconSize: 36.0,
+                              icon: const Icon(Icons.open_in_new),
+                              onPressed: () async {
+                                final String url = Uri.encodeFull(photo.urls.fullSizeUrl);
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  print('Could not launch $url');
+                                }
+                              }),
+                        ],
+                      ),
                     ),
                   ],
                 ),

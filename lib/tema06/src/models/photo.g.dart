@@ -30,6 +30,8 @@ class _$PhotoSerializer implements StructuredSerializer<Photo> {
       'urls',
       serializers.serialize(object.urls,
           specifiedType: const FullType(PhotoUrls)),
+      'user',
+      serializers.serialize(object.user, specifiedType: const FullType(User)),
     ];
 
     return result;
@@ -66,6 +68,10 @@ class _$PhotoSerializer implements StructuredSerializer<Photo> {
           result.urls.replace(serializers.deserialize(value,
               specifiedType: const FullType(PhotoUrls)) as PhotoUrls);
           break;
+        case 'user':
+          result.user.replace(serializers.deserialize(value,
+              specifiedType: const FullType(User)) as User);
+          break;
       }
     }
 
@@ -84,11 +90,14 @@ class _$Photo extends Photo {
   final int height;
   @override
   final PhotoUrls urls;
+  @override
+  final User user;
 
   factory _$Photo([void Function(PhotoBuilder) updates]) =>
       (new PhotoBuilder()..update(updates)).build();
 
-  _$Photo._({this.id, this.color, this.width, this.height, this.urls})
+  _$Photo._(
+      {this.id, this.color, this.width, this.height, this.urls, this.user})
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('Photo', 'id');
@@ -104,6 +113,9 @@ class _$Photo extends Photo {
     }
     if (urls == null) {
       throw new BuiltValueNullFieldError('Photo', 'urls');
+    }
+    if (user == null) {
+      throw new BuiltValueNullFieldError('Photo', 'user');
     }
   }
 
@@ -122,15 +134,18 @@ class _$Photo extends Photo {
         color == other.color &&
         width == other.width &&
         height == other.height &&
-        urls == other.urls;
+        urls == other.urls &&
+        user == other.user;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc($jc(0, id.hashCode), color.hashCode), width.hashCode),
-            height.hashCode),
-        urls.hashCode));
+        $jc(
+            $jc($jc($jc($jc(0, id.hashCode), color.hashCode), width.hashCode),
+                height.hashCode),
+            urls.hashCode),
+        user.hashCode));
   }
 
   @override
@@ -140,7 +155,8 @@ class _$Photo extends Photo {
           ..add('color', color)
           ..add('width', width)
           ..add('height', height)
-          ..add('urls', urls))
+          ..add('urls', urls)
+          ..add('user', user))
         .toString();
   }
 }
@@ -168,6 +184,10 @@ class PhotoBuilder implements Builder<Photo, PhotoBuilder> {
   PhotoUrlsBuilder get urls => _$this._urls ??= new PhotoUrlsBuilder();
   set urls(PhotoUrlsBuilder urls) => _$this._urls = urls;
 
+  UserBuilder _user;
+  UserBuilder get user => _$this._user ??= new UserBuilder();
+  set user(UserBuilder user) => _$this._user = user;
+
   PhotoBuilder();
 
   PhotoBuilder get _$this {
@@ -177,6 +197,7 @@ class PhotoBuilder implements Builder<Photo, PhotoBuilder> {
       _width = _$v.width;
       _height = _$v.height;
       _urls = _$v.urls?.toBuilder();
+      _user = _$v.user?.toBuilder();
       _$v = null;
     }
     return this;
@@ -205,12 +226,15 @@ class PhotoBuilder implements Builder<Photo, PhotoBuilder> {
               color: color,
               width: width,
               height: height,
-              urls: urls.build());
+              urls: urls.build(),
+              user: user.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'urls';
         urls.build();
+        _$failedField = 'user';
+        user.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'Photo', _$failedField, e.toString());

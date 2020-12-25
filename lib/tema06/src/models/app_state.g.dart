@@ -15,11 +15,14 @@ class _$AppState extends AppState {
   final String orientation;
   @override
   final String query;
+  @override
+  final String username;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.isLoading, this.photo, this.orientation, this.query})
+  _$AppState._(
+      {this.isLoading, this.photo, this.orientation, this.query, this.username})
       : super._() {
     if (isLoading == null) {
       throw new BuiltValueNullFieldError('AppState', 'isLoading');
@@ -40,15 +43,18 @@ class _$AppState extends AppState {
         isLoading == other.isLoading &&
         photo == other.photo &&
         orientation == other.orientation &&
-        query == other.query;
+        query == other.query &&
+        username == other.username;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, isLoading.hashCode), photo.hashCode),
-            orientation.hashCode),
-        query.hashCode));
+        $jc(
+            $jc($jc($jc(0, isLoading.hashCode), photo.hashCode),
+                orientation.hashCode),
+            query.hashCode),
+        username.hashCode));
   }
 
   @override
@@ -57,7 +63,8 @@ class _$AppState extends AppState {
           ..add('isLoading', isLoading)
           ..add('photo', photo)
           ..add('orientation', orientation)
-          ..add('query', query))
+          ..add('query', query)
+          ..add('username', username))
         .toString();
   }
 }
@@ -81,6 +88,10 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   String get query => _$this._query;
   set query(String query) => _$this._query = query;
 
+  String _username;
+  String get username => _$this._username;
+  set username(String username) => _$this._username = username;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -89,6 +100,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _photo = _$v.photo?.toBuilder();
       _orientation = _$v.orientation;
       _query = _$v.query;
+      _username = _$v.username;
       _$v = null;
     }
     return this;
@@ -116,7 +128,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               isLoading: isLoading,
               photo: _photo?.build(),
               orientation: orientation,
-              query: query);
+              query: query,
+              username: username);
     } catch (_) {
       String _$failedField;
       try {

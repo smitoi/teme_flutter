@@ -26,4 +26,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
 
   @nullable
   String get query;
+
+  @nullable
+  String get username;
 }

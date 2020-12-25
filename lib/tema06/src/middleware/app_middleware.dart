@@ -24,7 +24,7 @@ class AppMiddleware {
 
     if (action is GetPhotoStart) {
       try {
-        final PhotoBuilder photo = await _unsplashApi.getPhoto();
+        final PhotoBuilder photo = await _unsplashApi.getPhoto(store.state.username);
         final GetPhotoSuccessful successful = GetPhoto.successful(photo);
         store.dispatch(successful);
       } catch (e) {

@@ -1,5 +1,5 @@
-import 'package:teme_flutter/tema06/src/actions/get_photo.dart';
-
+import '../actions/get_photo.dart';
+import '../actions/set_user.dart';
 import '../models/app_state.dart';
 
 AppState reducer(AppState state, dynamic action) {
@@ -14,6 +14,8 @@ AppState reducer(AppState state, dynamic action) {
     builder.isLoading = false;
   } else if (action is GetPhotoError) {
     builder.isLoading = false;
+  } else if (action is SetUser) {
+    builder.username = action.user;
   }
 
   return builder.build();
