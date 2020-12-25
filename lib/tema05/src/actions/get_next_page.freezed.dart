@@ -45,7 +45,6 @@ mixin _$GetNextPage {
     @required Result successful(List<Movie> movies),
     @required Result error(dynamic error),
   });
-
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>(
     Result $default(), {
@@ -53,14 +52,12 @@ mixin _$GetNextPage {
     Result error(dynamic error),
     @required Result orElse(),
   });
-
   @optionalTypeArgs
   Result map<Result extends Object>(
     Result $default(GetNextPageStart value), {
     @required Result successful(GetNextPageSuccessful value),
     @required Result error(GetNextPageError value),
   });
-
   @optionalTypeArgs
   Result maybeMap<Result extends Object>(
     Result $default(GetNextPageStart value), {
@@ -72,7 +69,9 @@ mixin _$GetNextPage {
 
 /// @nodoc
 abstract class $GetNextPageCopyWith<$Res> {
-  factory $GetNextPageCopyWith(GetNextPage value, $Res Function(GetNextPage) then) = _$GetNextPageCopyWithImpl<$Res>;
+  factory $GetNextPageCopyWith(
+          GetNextPage value, $Res Function(GetNextPage) then) =
+      _$GetNextPageCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -80,21 +79,23 @@ class _$GetNextPageCopyWithImpl<$Res> implements $GetNextPageCopyWith<$Res> {
   _$GetNextPageCopyWithImpl(this._value, this._then);
 
   final GetNextPage _value;
-
   // ignore: unused_field
   final $Res Function(GetNextPage) _then;
 }
 
 /// @nodoc
 abstract class $GetNextPageStartCopyWith<$Res> {
-  factory $GetNextPageStartCopyWith(GetNextPageStart value, $Res Function(GetNextPageStart) then) =
+  factory $GetNextPageStartCopyWith(
+          GetNextPageStart value, $Res Function(GetNextPageStart) then) =
       _$GetNextPageStartCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$GetNextPageStartCopyWithImpl<$Res> extends _$GetNextPageCopyWithImpl<$Res>
+class _$GetNextPageStartCopyWithImpl<$Res>
+    extends _$GetNextPageCopyWithImpl<$Res>
     implements $GetNextPageStartCopyWith<$Res> {
-  _$GetNextPageStartCopyWithImpl(GetNextPageStart _value, $Res Function(GetNextPageStart) _then)
+  _$GetNextPageStartCopyWithImpl(
+      GetNextPageStart _value, $Res Function(GetNextPageStart) _then)
       : super(_value, (v) => _then(v as GetNextPageStart));
 
   @override
@@ -181,16 +182,18 @@ abstract class GetNextPageStart implements GetNextPage {
 
 /// @nodoc
 abstract class $GetNextPageSuccessfulCopyWith<$Res> {
-  factory $GetNextPageSuccessfulCopyWith(GetNextPageSuccessful value, $Res Function(GetNextPageSuccessful) then) =
+  factory $GetNextPageSuccessfulCopyWith(GetNextPageSuccessful value,
+          $Res Function(GetNextPageSuccessful) then) =
       _$GetNextPageSuccessfulCopyWithImpl<$Res>;
-
   $Res call({List<Movie> movies});
 }
 
 /// @nodoc
-class _$GetNextPageSuccessfulCopyWithImpl<$Res> extends _$GetNextPageCopyWithImpl<$Res>
+class _$GetNextPageSuccessfulCopyWithImpl<$Res>
+    extends _$GetNextPageCopyWithImpl<$Res>
     implements $GetNextPageSuccessfulCopyWith<$Res> {
-  _$GetNextPageSuccessfulCopyWithImpl(GetNextPageSuccessful _value, $Res Function(GetNextPageSuccessful) _then)
+  _$GetNextPageSuccessfulCopyWithImpl(
+      GetNextPageSuccessful _value, $Res Function(GetNextPageSuccessful) _then)
       : super(_value, (v) => _then(v as GetNextPageSuccessful));
 
   @override
@@ -222,15 +225,18 @@ class _$GetNextPageSuccessful implements GetNextPageSuccessful {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is GetNextPageSuccessful &&
-            (identical(other.movies, movies) || const DeepCollectionEquality().equals(other.movies, movies)));
+            (identical(other.movies, movies) ||
+                const DeepCollectionEquality().equals(other.movies, movies)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(movies);
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(movies);
 
   @override
   $GetNextPageSuccessfulCopyWith<GetNextPageSuccessful> get copyWith =>
-      _$GetNextPageSuccessfulCopyWithImpl<GetNextPageSuccessful>(this, _$identity);
+      _$GetNextPageSuccessfulCopyWithImpl<GetNextPageSuccessful>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -290,25 +296,27 @@ class _$GetNextPageSuccessful implements GetNextPageSuccessful {
 }
 
 abstract class GetNextPageSuccessful implements GetNextPage {
-  const factory GetNextPageSuccessful(List<Movie> movies) = _$GetNextPageSuccessful;
+  const factory GetNextPageSuccessful(List<Movie> movies) =
+      _$GetNextPageSuccessful;
 
   List<Movie> get movies;
-
   $GetNextPageSuccessfulCopyWith<GetNextPageSuccessful> get copyWith;
 }
 
 /// @nodoc
 abstract class $GetNextPageErrorCopyWith<$Res> {
-  factory $GetNextPageErrorCopyWith(GetNextPageError value, $Res Function(GetNextPageError) then) =
+  factory $GetNextPageErrorCopyWith(
+          GetNextPageError value, $Res Function(GetNextPageError) then) =
       _$GetNextPageErrorCopyWithImpl<$Res>;
-
   $Res call({dynamic error});
 }
 
 /// @nodoc
-class _$GetNextPageErrorCopyWithImpl<$Res> extends _$GetNextPageCopyWithImpl<$Res>
+class _$GetNextPageErrorCopyWithImpl<$Res>
+    extends _$GetNextPageCopyWithImpl<$Res>
     implements $GetNextPageErrorCopyWith<$Res> {
-  _$GetNextPageErrorCopyWithImpl(GetNextPageError _value, $Res Function(GetNextPageError) _then)
+  _$GetNextPageErrorCopyWithImpl(
+      GetNextPageError _value, $Res Function(GetNextPageError) _then)
       : super(_value, (v) => _then(v as GetNextPageError));
 
   @override
@@ -340,11 +348,13 @@ class _$GetNextPageError implements GetNextPageError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is GetNextPageError &&
-            (identical(other.error, error) || const DeepCollectionEquality().equals(other.error, error)));
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
   @override
   $GetNextPageErrorCopyWith<GetNextPageError> get copyWith =>
@@ -411,6 +421,5 @@ abstract class GetNextPageError implements GetNextPage {
   const factory GetNextPageError(dynamic error) = _$GetNextPageError;
 
   dynamic get error;
-
   $GetNextPageErrorCopyWith<GetNextPageError> get copyWith;
 }
